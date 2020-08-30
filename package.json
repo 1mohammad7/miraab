@@ -1,0 +1,37 @@
+{
+  "name": "miraab",
+  "version": "1.0.0",
+  "description": "A simple Authentication As A Service (AaaS)",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [
+    "miraab",
+    "aaas",
+    "authentication",
+    "auth-manager",
+    "simple-aaas"
+  ],
+  "author": "Mohammad Abdi",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.0.0",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "crypto-random-int": "^1.0.1",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "helmet": "^4.1.0",
+    "joi": "^17.2.1",
+    "jsonwebtoken": "^8.5.1",
+    "kavenegar": "^1.1.4",
+    "lodash": "^4.17.20",
+    "mongoose": "^5.10.2",
+    "morgan": "^1.10.0",
+    "node-cache": "^5.1.2",
+    "random-item": "^3.0.0",
+    "safe-compare": "^1.1.4",
+    "winston": "^3.3.3"
+  }
+}
