@@ -16,8 +16,9 @@ module.exports.create = async (req, res, next) => {
 module.exports.delete = async (req, res, next) => {
     try {
         const { id } = req.params
+        const { userId } = req.user
 
-        const result = await service.delete(id)
+        const result = await service.delete(userId, id)
         res.formatter(2, result)
     } catch (err) {
         next(err)
@@ -25,8 +26,8 @@ module.exports.delete = async (req, res, next) => {
 }
 module.exports.user_apps = async (req, res, next) => {
     try {
-        const { id } = req.user
-        const result = await service.getByOwner(id)
+        const { userId } = req.user
+        const result = await service.getByOwner(userId)
         res.formatter(2, result)
     } catch (err) {
         next(err)

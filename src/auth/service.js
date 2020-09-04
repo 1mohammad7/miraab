@@ -16,11 +16,6 @@ const cache = new nodeCache({
     checkperiod: CONSTANTS.sms_code_check_period
 })
 
-
-module.exports.checkUserExists = async (userId, selectPassword) => {
-    return db.checkUserExists(userId, selectPassword)
-}
-
 module.exports.findAuth = async (refreshToken) => {
     return db.findAuth(refreshToken)
 }
@@ -57,7 +52,6 @@ module.exports.checkCode = async (phoneNumber, code) => {
 module.exports.registerUser = async (appId, data) => {
     //check if user has account , dont register
     data.app = appId
-    console.log(data);
     const user = await db.checkUserExists(appId, _.omit(data, 'password'))
     if (user) {
         throw new BaseError(4, 'This user is already registered. Proceed to login.', 401)
@@ -92,8 +86,9 @@ module.exports.registerUser = async (appId, data) => {
 // }
 
 module.exports.loginOtp = async (appId, phoneNumber, code) => {
-    const user = await db.checkUserExists(appId, phoneNumber)
-    if (!loginEntity.data) throw new BaseError(4, "Phone number not registered. Proceed to register.")
+    console.log({ appId, phoneNumber });
+    const user = await db.checkUserExists(appId, { phoneNumber })
+    if (!user) throw new BaseError(4, "Phone number not registered. Proceed to register.")
     if (!await this.checkCode(phoneNumber, code)) {
         throw new BaseError(4, "Invalid OTP code", 401)
     } else {

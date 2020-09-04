@@ -4,7 +4,6 @@ const { ValidationError } = require('joi')
 const { logger } = require('./logger')
 const moment = require('moment')
 module.exports = async (error, req, res, next) => {
-
     if (error.code == 3) {
         switch (error.name) {
             case 'TokenExpiredError':
@@ -13,6 +12,10 @@ module.exports = async (error, req, res, next) => {
             case 'JsonWebTokenError':
                 //Header Error
                 res.formatter(3, 'Your token is not valid : ' + error.message, 401)
+                break;
+            case 'TypeError':
+                //Header Error
+                res.formatter(3, 'YOu must provide a valid authentication header ', 400)
                 break;
             default:
                 res.formatter(5, 'Authentication failed : ' + error.message, 552)

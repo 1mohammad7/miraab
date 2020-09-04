@@ -31,7 +31,7 @@ module.exports.register = async (req, res, next) => {
             case STRATEGY.STRATEGY_PHONE:
                 await validation.sendCode.validateAsync({ phoneNumber, code })
                 if (await service.checkCode(phoneNumber, code)) {
-                    result = await service.registerUser(appId, appId, { phoneNumber })
+                    result = await service.registerUser(appId, { phoneNumber })
                 } else {
                     throw new BaseError(4, 'Wrong OTP Code', 401)
                 }
@@ -79,7 +79,7 @@ module.exports.login = async (req, res, next) => {
                 break;
             case STRATEGY.STRATEGY_EMAIL:
                 await validation.email.validateAsync({ email, password })
-                result = await service.loginUsername(appId, email, password)
+                result = await service.loginEmail(appId, email, password)
                 res.formatter(2, result, 200)
                 break;
             case STRATEGY.STRATEGY_PHONE:

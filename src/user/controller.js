@@ -20,10 +20,10 @@ module.exports.get_by_app = async (req, res, next) => {
 module.exports.delete = async (req, res, next) => {
     try {
         const { userId } = req.user
-        const appId = req.params.id
+        const { appId, userId: userToDelete } = req.params
         const app = await appDB.findApp(appId)
         if (app.owner == userId) {
-            const result = await service.delete(appId)
+            const result = await service.delete(userToDelete)
             res.formatter(2, result, 200)
         } else {
             throw new BaseError(1, 'You are not the owner of this app', 401)
