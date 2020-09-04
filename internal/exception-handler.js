@@ -19,12 +19,13 @@ module.exports = async (error, req, res, next) => {
                 break;
         }
     } else if (error instanceof ValidationError) {
+        console.log(error);
         res.formatter(1, error.details.map(detail => detail.message), 400)
     } else if (error instanceof BaseError) {
         if (error.shouldPrintStack) logger.error(error.stack)
         res.formatter(error.code || 5, error.message || error, error.status)
     } else {
-        logger.error(error.message || error)
+        logger.error(error)
         res.formatter(5, error.message || error, error.status || 551)
     }
 }

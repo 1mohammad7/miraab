@@ -48,7 +48,7 @@ app.use(exceptionHandler);
 
 
 // starting server
-const PORT = process.env.PORT || 4000
+const PORT = 5000
 const server = app.listen(PORT, () => {
     logger.info(`Listening on port ${PORT}`)
 })
